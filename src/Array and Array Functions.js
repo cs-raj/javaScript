@@ -11,6 +11,55 @@ function Employee(id,name,profileImage,introduction,profileLink){
     return this;
 }
 
+//Arguement -- Array containing the list of employee objects
+//Return type -- employee Object whose id is present else error message and return undefined
+function findEmployeeById(empObjArr,empid){
+   return empObjArr.find((empObj)=>empObj.id==empid );
+}
+
+//Arguement -- Object containing property on which we have to find the employee
+//Return type - Employee object that matches the search query
+function findEmployeeAllKeys(empObjArr,queryObj){
+    let foundEmployee = [];
+    const queryKeys = Object.keys(queryObj);
+    let employeeFound = false;
+    console.log(queryObj[queryKeys[0]]);
+    for(let i = 0;i<queryKeys.length;i++){
+        employeeFound = false;
+        for(let j = 0;j<empObjArr.length;j++){
+            if(empObjArr[j][queryKeys[i]]===queryObj[queryKeys[i]]){
+                foundEmployee = empObjArr[j];
+            }
+        }
+    }
+    console.log(employeeFound);
+}
+
+//Arguement -- Object containing property on which we have to find the employee
+//Return type - Employee object that matches the search query
+function findEmployee(empObjArr,queryObj){
+    const queryKey = Object.keys(queryObj)[0];
+    // console.log()
+    const empObj = [];
+    empObjArr.find(function(element){
+        if(element[queryKey]===queryObj[queryKey]){
+            empObj.push(element);
+        }
+    });
+    if(empObj.length!==0){
+        return empObj;
+    }
+    else{
+        console.log("There's No Match to your query");
+        return;
+    }
+
+}
+
+//Arguement -- id,  update object
+function updateEmployeeById(empObjArr,id,updateObject){
+    
+}
 //Data Source
 const employees = [
     {
@@ -130,4 +179,7 @@ function createEmployee(){
     });
 }
 createEmployee();
-console.log(EmployeeArr);
+//findEmployeeAllKeys(EmployeeArr,{'id':"1",'name':"Vibhuti Bajaj"});
+console.log(findEmployee(EmployeeArr,{'id':"9"}));
+// console.log(EmployeeArr);
+// console.log(findEmployeeById(EmployeeArr,22));
