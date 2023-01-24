@@ -32,7 +32,7 @@ function findEmployeeAllKeys(empObjArr,queryObj){
             }
         }
     }
-    console.log(employeeFound);
+    return foundEmployee;
 }
 
 //Arguement -- Object containing property on which we have to find the employee
@@ -56,10 +56,24 @@ function findEmployee(empObjArr,queryObj){
 
 }
 
+// Arguement -- Employee Array, Id of employee to be deleted
+// Return type -- Modified Employee Array
+function deleteEmployeeById(empArr,id){
+
+    empArr.splice(empArr.findIndex((emp)=>emp.id==id),1);
+    return empArr;
+}
 //Arguement -- id,  update object
 function updateEmployeeById(empObjArr,id,updateObject){
-    
+    const objectToUpdate = empObjArr.find((obj)=>obj.id==id);
+    // console.log(Object.keys(updateObject)[0])
+    // console.log(objectToUpdate[Object.keys(updateObject)[0]]);
+    // console.log(Object.values(updateObject)[0]);
+    objectToUpdate[Object.keys(updateObject)[0]] = Object.values(updateObject)[0]; //Working on the copy of the object
+    console.log(empObjArr);
+    return objectToUpdate;
 }
+
 //Data Source
 const employees = [
     {
@@ -179,7 +193,8 @@ function createEmployee(){
     });
 }
 createEmployee();
-//findEmployeeAllKeys(EmployeeArr,{'id':"1",'name':"Vibhuti Bajaj"});
+console.log(findEmployeeAllKeys(EmployeeArr,{'id':"1",'name':"Vibhuti Bajaj"}));
 console.log(findEmployee(EmployeeArr,{'id':"9"}));
-// console.log(EmployeeArr);
-// console.log(findEmployeeById(EmployeeArr,22));
+console.log(findEmployeeById(EmployeeArr,22));
+console.log(updateEmployeeById(EmployeeArr,"1",{'name':"vb"}));
+console.log(deleteEmployeeById(EmployeeArr,"9"));
